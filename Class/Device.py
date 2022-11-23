@@ -1,6 +1,6 @@
 class Device():
 
-    def __init__(self, tipo, hostname):
+    def __init__(self):
 
-        self.tipo = tipo
-        self.hostname = hostname
+        self.tipo = 0
+        self.hostname = 0
