@@ -4,4 +4,3 @@ class Device():
 
         self.tipo = tipo
         self.hostname = hostname
-        
