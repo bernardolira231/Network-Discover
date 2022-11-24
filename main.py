@@ -1,7 +1,6 @@
 from Class.Interface import *
 from Connections.DBConection import *
 from Connections.networkCon import *
-import netmiko
 import pymysql
 
 
@@ -12,3 +11,13 @@ def main():
 
     FD = Interface(ip)
     FD.SshConnection(user, pswd)
+
+    print('Menu\n')
+    print('1) Cambiar Banner-Mtod')
+    print('2) Cambiar Hostname')
+    print('3) Cambiar ')
+    a = int( input('R: ') )
+
+    if a == 1:
+        bm = input('Que banner-mtod le gustaria ingresar: ')
+        FD.ChangeBannerMtod(bm)

@@ -19,6 +19,10 @@ class Interface(Device):
 
         self.netConnect = ConnectHandler(**self.con)
 
+    def ChangeBannerMtod(self, bm):
+        self.netConnect.config_mode()
+        self.netConnect.send_command('banner mtod q %s q'.format(bm))
+
     def CloseSshConnection(self):
         self.netConnect.disconnect()
 
