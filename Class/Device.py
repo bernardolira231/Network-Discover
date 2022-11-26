@@ -18,6 +18,17 @@ class Device():
             'password': pswd
         }
 
+    def getHostname(self):
+        netConnect = netmiko.ConnectHandler(**self.con)
+        output = netConnect.send_command('show running-config | include hostname')
+        netConnect.disconnect()
+        l = ''
+        for i in range(len(output)):
+            while i >= 9 and i <= len(output):
+                l = l + output[i]
+                break
+        print(l)
+
 
     def showInterfacesUp(self):
         netConnect = netmiko.ConnectHandler(**self.con)

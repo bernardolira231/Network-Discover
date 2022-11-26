@@ -10,7 +10,8 @@ def main():
     pswd = input('Ingrese la contraseña del usuario ssh: ')
     device = Device()
     device.ip = ip
-    device.pIp()
+    device.createSshDict(user, pswd)
+    device.getHostname()
 
 
 if __name__ == "__main__":
