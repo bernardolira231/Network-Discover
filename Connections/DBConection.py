@@ -13,7 +13,7 @@ class sqlconect:
                                     )
         return connection
 
-    def insertValues(self, ip):
+    def insertValuesInterface(self, ip):
 
         cone = self.Open()
         cursor = cone.cursor()
@@ -22,6 +22,8 @@ class sqlconect:
         cone.commit()
         cone.close()
 
+    def insertValues(self, hostname, ip):
+        pass
 
     def get_ip(self):
 

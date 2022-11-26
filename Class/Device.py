@@ -28,7 +28,10 @@ class Device():
                 l = l + output[i]
                 break
         print(l)
+        self.hostname = l
 
+    def sndInfoToSql(self):
+        pass
 
     def showInterfacesUp(self):
         netConnect = netmiko.ConnectHandler(**self.con)
