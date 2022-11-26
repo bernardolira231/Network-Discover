@@ -1,13 +1,14 @@
-import netmiko
+from Connections.DBConection import *
 from netmiko import ConnectHandler
-from Device import *
+from Class.Device import *
 
 class Interface(Device):
 
-    def __init__(self, ip):
+    def __init__(self):
 
-        self.ip = ip
-        self.name = ""
+        self.ip = ''
+        self.name = ''
+        self.neighbor = []
 
     def SshConnection(self, user, pswd):
         self.con = {
@@ -18,6 +19,10 @@ class Interface(Device):
         }
 
         self.netConnect = ConnectHandler(**self.con)
+
+    def Mapping_topology(self):
+        print(self.hostname + '\n'\
+              'esta conectado por')
 
     def ChangeBannerMtod(self, bm):
         self.netConnect.config_mode()

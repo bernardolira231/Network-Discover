@@ -1,23 +1,17 @@
-from Class.Interface import *
+from Class.Device import *
 from Connections.DBConection import *
 from Connections.networkCon import *
-import pymysql
 
 
 def main():
+    sqlConection = sqlconect()
     ip = input('Ingrese la ip del dispositivo a conctar: ')
     user = input('Cual es su usuario del ssh: ')
     pswd = input('Ingrese la contraseña del usuario ssh: ')
+    device = Device()
+    device.ip = ip
+    device.pIp()
 
-    FD = Interface(ip)
-    FD.SshConnection(user, pswd)
 
-    print('Menu\n')
-    print('1) Cambiar Banner-Mtod')
-    print('2) Cambiar Hostname')
-    print('3) Cambiar ')
-    a = int( input('R: ') )
-
-    if a == 1:
-        bm = input('Que banner-mtod le gustaria ingresar: ')
-        FD.ChangeBannerMtod(bm)
+if __name__ == "__main__":
+    main()
