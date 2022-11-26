@@ -22,8 +22,17 @@ class sqlconect:
         cone.commit()
         cone.close()
 
-    def insertValues(self, hostname, ip):
-        pass
+    def insertValues(self, dev, inte):
+        cone = self.Open()
+        cursor = cone.cursor()
+        sql = "insert into Device(type, hostname) values(%s, %s)"
+        cursor.execute(sql, dev)
+        cone.commit()
+        sql2 = 'insert into Interface(ip, hostname_device) values(%s, %s)'
+        cursor.execute(sql2, inte)
+        cone.commit()
+        cone.close()
+
 
     def get_ip(self):
 

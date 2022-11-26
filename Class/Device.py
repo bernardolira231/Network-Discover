@@ -20,18 +20,15 @@ class Device():
 
     def getHostname(self):
         netConnect = netmiko.ConnectHandler(**self.con)
-        output = netConnect.send_command('show running-config | include hostname')
+        output = netConnect.send_command('show running-config | include hostname').split()[1]
         netConnect.disconnect()
-        l = ''
-        for i in range(len(output)):
-            while i >= 9 and i <= len(output):
-                l = l + output[i]
-                break
-        print(l)
-        self.hostname = l
+        self.hostname = output
 
-    def sndInfoToSql(self):
-        pass
+        if output[0] == 'S' or output[0] == 's':
+            self.type = 'Switch'
+        elif output[0] == 'R' or output[0] == 'r':
+            self.tipo = 'Router'
+
 
     def showInterfacesUp(self):
         netConnect = netmiko.ConnectHandler(**self.con)

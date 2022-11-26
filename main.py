@@ -1,6 +1,5 @@
 from Class.Device import *
 from Connections.DBConection import *
-from Connections.networkCon import *
 
 
 def main():
@@ -12,6 +11,9 @@ def main():
     device.ip = ip
     device.createSshDict(user, pswd)
     device.getHostname()
+    dev = (device.tipo, device.hostname)
+    inte = (device.ip, device.hostname)
+    sqlConection.insertValues(dev, inte)
 
 
 if __name__ == "__main__":
