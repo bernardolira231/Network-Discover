@@ -7,9 +7,6 @@ class Device():
         self.hostname = ''
         self.ip = ''
 
-    def pIp(self):
-        print(self.ip)
-
     def createSshDict(self, user, pswd):
         self.con = {
             'device_type': 'cisco_ios',
@@ -24,18 +21,17 @@ class Device():
         netConnect.disconnect()
         self.hostname = output
 
-        if output[0] == 'S' or output[0] == 's':
-            self.type = 'Switch'
-        elif output[0] == 'R' or output[0] == 'r':
-            self.tipo = 'Router'
 
-
-    def showInterfacesUp(self):
+    def getType(self):
         netConnect = netmiko.ConnectHandler(**self.con)
-        output = netConnect.send_command('show ip interface brief | include down')
+        output = netConnect.send_command('show ip interface brief')
         netConnect.disconnect()
         count = 1
         for i in output:
             if i == '\n':
                 count = count +1
-        print('Total de interfaces disponibles en S8:  %i \n\n' %(count))
+
+        if count > 10:
+            self.tipo = 'Switch'
+        else:
+            self.tipo = 'Router'

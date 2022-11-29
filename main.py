@@ -1,20 +1,30 @@
 from Class.Device import *
 from Connections.DBConection import *
+from Connections.cdp import *
 
 
 def main():
-    sqlConection = sqlconect()
-    ip = input('Ingrese la ip del dispositivo a conctar: ')
-    user = input('Cual es su usuario del ssh: ')
-    pswd = input('Ingrese la contraseña del usuario ssh: ')
-    device = Device()
-    device.ip = ip
-    device.createSshDict(user, pswd)
-    device.getHostname()
-    dev = (device.tipo, device.hostname)
-    inte = (device.ip, device.hostname)
-    sqlConection.insertValues(dev, inte)
+    l = []
+    q = []
+    ip = input('Ingresa la ip del dispositivo a conectar: ')
+    con = connectssh(ip)
+    #user = input('Ingresa el usuario de ssh: ')
+    #pswd = input('Ingresa la contraseña del ssh: ')
+    l.append(ip)
+    l, net_connect, q = cdp(con, l, q)
+    net_connect.disconnect()
 
+    print(f'1. {l}')
+    print(f'1. {q}')
+
+    for i in range(500):
+        if i != 0:
+            con = connectssh(l[i])
+            l, net_connect, q = cdp(con, l, q)
+            net_connect.disconnect()
+
+    print(f'2. {l}')
+    print(f'2. {q}')
 
 if __name__ == "__main__":
     main()
