@@ -1,10 +1,10 @@
 import netmiko
 
-def connectssh(ip):
+def connectssh(ip, user, pswd):
     connection = {  'device_type': 'cisco_ios',
                     'host': ip,
-                    'username': 'admin',
-                    'password': 'admin'
+                    'username': user,
+                    'password': pswd
                 }
     return connection
 
@@ -25,6 +25,6 @@ def addlisthost(output, q):
 def addlistip(output, l):
     for i in range(len(output)):
         if output[i]['management_ip'] not in l:
-            l.append(output[i]['management_ip'])
+            l.append([output[i]['management_ip']['destination_host']])
     return l
 

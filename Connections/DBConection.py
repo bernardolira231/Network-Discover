@@ -1,10 +1,6 @@
 import pymysql
 
 class sqlconect:
-    def __init__(self):
-
-        self.ip = ''
-
     def Open(self):
         connection = pymysql.connect( host='localhost',
                                       user='root',
@@ -13,23 +9,22 @@ class sqlconect:
                                     )
         return connection
 
-    def insertValuesInterface(self, ip):
+    def insertValuesInterface(self, l):
 
         cone = self.Open()
         cursor = cone.cursor()
-        sql = "insert into Interface(ip) values(%s)"
-        cursor.execute(sql, ip)
-        cone.commit()
+        for i in l:
+            sql = "insert into Interface(ip, hostname) values(%s, %s)"
+            cursor.execute(sql, i)
+            cone.commit()
         cone.close()
 
-    def insertValues(self, dev, inte):
+    def insertValues(self, dev):
         cone = self.Open()
         cursor = cone.cursor()
-        sql = "insert into Device(type, hostname) values(%s, %s)"
-        cursor.execute(sql, dev)
-        cone.commit()
-        sql2 = 'insert into Interface(ip, hostname_device) values(%s, %s)'
-        cursor.execute(sql2, inte)
+        for i in dev:
+            sql = "insert into Device(type, hostname) values(%s, %s)"
+            cursor.execute(sql, dev)
         cone.commit()
         cone.close()
 
